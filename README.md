@@ -1,2 +1,2 @@
-AI in Manufacturing, Purdue SURF 2024
+# AI in Manufacturing, Purdue SURF 2024
 Technical Summary of work performed by Everett "CJ" Mason, Jr. at Purdue University's 2024 Summer Undergraduate Research Fellowship (SURF).
