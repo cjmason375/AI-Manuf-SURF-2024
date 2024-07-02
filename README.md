@@ -21,7 +21,7 @@ To effectively implement AI and ML into the industrial scene, collecting and ana
 
 With an ML model created, optimizing the speed at which the model can make decisions is crucial. Traditional ML methods rely on cloud computing, which incorporates multiple aspects that can slow decision-making, such as increased bandwidth, power consumption, and latency. [Edge computing](https://www.ibm.com/topics/edge-computing) is an effective solution as it prioritizes computing that performs within short proximity to the target device. In the case of IIoT, this means incorporating edge computing devices as close to the machine as possible.
 
-The Purdue SURF Project revolves around the case study of implementing a ***multi-sensor analysis Machine Learning model*** on a plasma etcher machine at Purdue University's Birck Nanotechnology Center. Using (four) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase in current data observed when the machine actively performs a recipe. This model will then be implemented onto an edge computing device to track electrical usage and access the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
+The Purdue SURF Project revolves around the case study of implementing a ***multi-sensor analysis Machine Learning model*** on a plasma etcher machine at Purdue University's Birck Nanotechnology Center (BNC). Using (four) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase in current data observed when the machine actively performs a recipe. This model will then be implemented onto an edge computing device to track electrical usage and access the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
 
 
 
@@ -29,11 +29,19 @@ The Purdue SURF Project revolves around the case study of implementing a ***mult
 
 ## *METHODS*
 
-### Machine Learning Framework: There are 4 main essential components that are important to smart monitoring in manufacturing
+<img width="1156" alt="Screenshot 2024-07-02 at 2 27 55 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/ffbd5db3-3e30-4d5b-a6ce-85253173c49a">
 
-  #### *1. Data Collection* <br>
-  #### *2. Middleware* <br>
-  #### *3. Database & Visualization* <br>
-  #### *4. Machine Learning* <br>
+### *1. Data Collection:* IoT sensor connectivity and communication <br>
+
+Prior to the research project, BNC staff installed four current sensors in the breaker control box to 
+
+
+
+
+### *2. Middleware:* allows hardware devices to communicate and seamlessly integrate technologies <br>
+
+### *3. Database & Visualization:* cleaning, organizing, and visualizing data <br>
+
+### *4. Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
 
 
