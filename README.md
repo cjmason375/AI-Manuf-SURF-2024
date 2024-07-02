@@ -33,7 +33,7 @@ The Purdue SURF Project revolves around the case study of implementing a ***mult
 
 ### *1. Data Collection:* IoT sensor connectivity and communication <br>
 
-Prior to the research project, BNC staff installed four current sensors in the breaker control box to 
+Before the SURF project began, BNC staff installed four ***ifm*** current sensors in the circuit breaker box to monitor and collect current consumption data on the plasma etcher machine's 3-phase electric power plug, which includes three active wires and one neutral wire. A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link protocol for measuring current.
 
 
 
