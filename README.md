@@ -6,33 +6,23 @@ Feel free to contact me at *jemason@purdue.edu* or *everettmasonjr23@gmail.com*
 View [abstract](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/Abstract.md) here.
 
 
+<br>
 
 ## INTRODUCTION/BACKGROUND
 
 #### *From Everett's [Annotated Literature Review](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/Annotated%20Literature%20Review):* <br>
 
-*"The NSF AI in Manufacturing project seeks to innovate standard industrial processes by incorporating emerging Machine Learning (ML) and Artificial Intelligence (AI) practices for smart detection. Within this multi-university project, my team is focusing on the use of TinyML in the Industrial Internet of Things (IIoT) and using multi-sensor analysis on machines for predictive maintenance and productivity monitoring."*
+*"The NSF AI in Manufacturing project seeks to innovate standard industrial processes by incorporating emerging Machine Learning (ML) and Artificial Intelligence (AI) practices for smart detection. Within this multi-university project, my team is focusing on the use of TinyML in the [Industrial Internet of Things](https://www.iberdrola.com/innovation/what-is-iiot#:~:text=The%20Industrial%20Internet%20of%20Things%20(IIoT)%20is%20the%20collection%20of,the%20internet%20to%20industrial%20applications.) (IIoT) and using multi-sensor analysis on machines for predictive maintenance and productivity monitoring."*
 
-[Industry 4.0](https://www.ibm.com/topics/industry-4-0) is an ongoing shift for factories towards utilizing smart manufacturing means in modern manufacturing processes. This digitalization of the industrial world uses Artificial Intelligence (AI) and Machine Learning (ML) for automated real-time decision-making, optimizing productivity means, and reducing production costs. The [Internet of Things (IoT)](https://www.oracle.com/internet-of-things/what-is-iot/) has become increasingly important in this field, as IoT devices can connect and transfer data over the internet. 
+[Industry 4.0](https://www.ibm.com/topics/industry-4-0) is an ongoing shift for factories towards utilizing smart manufacturing means in modern manufacturing processes. This digitalization of the industrial world uses Artificial Intelligence (AI) and Machine Learning (ML) for automated real-time decision-making, optimizing productivity means, and reducing production costs. The [Internet of Things (IoT)](https://www.oracle.com/internet-of-things/what-is-iot/) has become increasingly important in this field, as IoT devices can connect and transfer data over the internet.
 
-To effectively implement AI and ML into the industrial scene, collecting and analyzing data is essential for creating accurate and efficient models. For industrial purposes, IIoT encompasses a multitude of sensors and instruments that can be used to collect signifiacant data about machine operation. Some primary data collection fields on machines are electrical consumption, motion/vibration, environment, sound, and vision. This collected data can then be used to train an ML model to track or make decisions based on a machine's operation state, a type of operation that a machine is running, abnormal behavior of the machine. 
+To effectively implement AI and ML into the industrial scene, collecting and analyzing data is essential for creating accurate and efficient models. For industrial purposes, IIoT encompasses a multitude of sensors and instruments that can be used to collect significant data about machine operation. Some primary data collection fields on machines are electrical consumption, motion/vibration, environment, sound, and vision. This collected data can then be used to train an ML model to track or make decisions based on a machine's operation state, the type of operation that a machine is running, abnormal behavior of the machine, or other parameters. 
 
+With an ML model created, optimizing the speed at which the model can make decisions is crucial. Traditional ML methods rely on cloud computing, which incorporates multiple aspects that can slow decision-making, such as increased bandwidth, power consumption, and latency. [Edge computing](https://www.ibm.com/topics/edge-computing) is an effective solution as it prioritizes computing that performs within short proximity to the target device. In the case of IIoT, this means incorporating edge computing devices as close to the machine as possible.
 
-(Edge computing) Once a ML model has been created, it is important to implement hte model in a way with which decision-making can be done as quickly as possible
-
-
-
-[TinyML](https://www.datacamp.com/blog/what-is-tinyml-tiny-machine-learning#)
-
-{talk about significance of data}
- Edge computing has also become 
+The Purdue SURF Project revolves around the case study of implementing a ***multi-sensor analysis Machine Learning model*** on a plasma etcher machine at Purdue University's Birck Nanotechnology Center. Using (four) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase in current data observed when the machine actively performs a recipe. This model will then be implemented onto an edge computing device to track electrical usage and access the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
 
 
-As Industry 4.0 emerges across the industrial scene, factories are seeking the use of new technologies to improve the efficiency and economics of manufacturing processes. One such useful technology is the Internet of Things (IoT) and its ability to connect devices and transfer data through the internet. Ongoing research seeks to utilize IoT devices for the implementation of TinyML on machines, which can track machine operation states, track and potentially optimize specific operations, and also detect anomalies in machine behavior. TinyML allows for Machine Learning (ML) to occur directly on machines through small, low-powered devices, improving multiple issues with traditional ML processes such as latency, power consumption, and bandwith issues.
+<br>
 
-{more speciifc background to the project}
-This project is a case study seeking to implement a Machine Learning model on a plasma etching machine at Purdue University's Birck Nanotechnology Center.
-
-(add more here)
-
-For more information, view the [Annotated Literature Review](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/Annotated%20Literature%20Review).
+## METHODS
