@@ -38,6 +38,7 @@ Before the SURF project began, BNC staff installed four ***ifm*** current sensor
 
 
 
+
 ### *2. Middleware:* allows hardware devices to communicate and seamlessly integrate technologies <br>
 
 ### *3. Database & Visualization:* cleaning, organizing, and visualizing data <br>
