@@ -21,7 +21,9 @@ To effectively implement AI and ML into the industrial scene, collecting and ana
 
 With an ML model created, optimizing the speed at which the model can make decisions is crucial. Traditional ML methods rely on cloud computing, which incorporates multiple aspects that can slow decision-making, such as increased bandwidth, power consumption, and latency. [Edge computing](https://www.ibm.com/topics/edge-computing) is an effective solution as it prioritizes computing that performs within short proximity to the target device. In the case of IIoT, this means incorporating edge computing devices as close to the machine as possible.
 
-The Purdue SURF Project revolves around the case study of implementing a ***multi-sensor analysis Machine Learning model*** on a plasma etcher machine at Purdue University's Birck Nanotechnology Center (BNC). Using (four) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase in current data observed when the machine actively performs a recipe. This model will then be implemented onto an edge computing device to track electrical usage and access the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
+The Purdue SURF Project revolves around the case study of implementing a ***multi-sensor analysis Machine Learning model*** on a plasma etcher machine within the Semiconductor Cleanroom at Purdue University's Birck Nanotechnology Center (BNC). The machine has multiple components that contribute to the overall current consumption: the main chamber, loading chamber, chiller, and turbo pump (high vacuum). There is also a gas pipline, vacuum pump (low vacuum), and control PC, but these components do not significantly contribute to the measured current consumption. When not in operation, the chiller and turbo pump periodically operate to maintain a constant temperature and pressure within the chamber.
+
+Using (four) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase in current data observed when the machine oeprates a recipe. This model will then be implemented onto an edge computing device to track electrical usage and execute the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
 
 
 
@@ -29,20 +31,24 @@ The Purdue SURF Project revolves around the case study of implementing a ***mult
 
 ## *METHODS*
 
-<img width="1156" alt="Screenshot 2024-07-02 at 2 27 55 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/ffbd5db3-3e30-4d5b-a6ce-85253173c49a">
-
-### *1. Data Collection:* IoT sensor connectivity and communication <br>
-
-Before the SURF project began, BNC staff installed four ***ifm*** current sensors in the circuit breaker box to monitor and collect current consumption data on the plasma etcher machine's 3-phase electric power plug, which includes three active wires and one neutral wire. A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link protocol for measuring current.
+<img width="1164" alt="Screenshot 2024-07-03 at 4 02 21 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/9b08e460-c3d7-4495-80a6-98e8302898ff">
 
 
+### *1) Data Collection:* IoT sensor connectivity and communication <br>
+
+Before the SURF project began, BNC staff installed four ***ifm*** current transformer (CT) sensors in the circuit breaker box to monitor and collect current consumption data on the plasma etcher machine's 3-phase electric power plug, which includes three active wires and one neutral wire. A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link network communications protocol for measuring current using Analog-to-Digital Conversion (ADC). This laptop will not only serve as the edge computer for the project, but is also able to be remotely accessed for data collection as the Cleanroom requires strict Personal Protective Equipment guidelines and is not easily accessible. The setup is depicted in the diagram below:
+
+<img width="734" alt="Screenshot 2024-07-03 at 3 59 49 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/1e7cef48-6291-40d4-ae2a-cfa9828f2664">
+
+After installation of sensors, the plasma etcher machine continued to be operated as normal by the staff within BNC's Cleanroom. The laptop continously collected current data from the span of May 16, 2024 to June 14, 2024 for the three phase wires (named "Phase A", "Phase B", and "Phase C") and neutral wire.
+
+
+Moneo software installed on the computer continued to collect 
 
 
 
-### *2. Middleware:* allows hardware devices to communicate and seamlessly integrate technologies <br>
+### *2) Database & Visualization:* cleaning, organizing, and visualizing data <br>
 
-### *3. Database & Visualization:* cleaning, organizing, and visualizing data <br>
-
-### *4. Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
+### *3) Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
 
 
