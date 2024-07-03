@@ -23,7 +23,7 @@ With an ML model created, optimizing the speed at which the model can make decis
 
 The Purdue SURF Project revolves around the case study of implementing a ***multi-sensor analysis Machine Learning model*** on a plasma etcher machine within the Semiconductor Cleanroom at Purdue University's Birck Nanotechnology Center (BNC). The machine has multiple components that contribute to the overall current consumption: the main chamber, loading chamber, chiller, and turbo pump (high vacuum). There is also a gas pipline, vacuum pump (low vacuum), and control PC, but these components do not significantly contribute to the measured current consumption. When not in operation, the chiller and turbo pump periodically operate to maintain a constant temperature and pressure within the chamber.
 
-Using (four) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase in current data observed when the machine oeprates a recipe. This model will then be implemented onto an edge computing device to track electrical usage and execute the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
+Using (four) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase in current data observed when the machine operates a recipe. This model will then be implemented onto an edge computing device to track electrical usage and execute the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
 
 
 
@@ -32,22 +32,37 @@ Using (four) IoT current sensors connected through the IO-Link protocol, data wa
 ## *METHODS*
 
 <img width="1164" alt="Screenshot 2024-07-03 at 4 02 21 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/9b08e460-c3d7-4495-80a6-98e8302898ff">
-
+<br> 
 
 ### *1) Data Collection:* IoT sensor connectivity and communication <br>
 
-Before the SURF project began, BNC staff installed four ***ifm*** current transformer (CT) sensors in the circuit breaker box to monitor and collect current consumption data on the plasma etcher machine's 3-phase electric power plug, which includes three active wires and one neutral wire. A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link network communications protocol for measuring current using Analog-to-Digital Conversion (ADC). This laptop will not only serve as the edge computer for the project, but is also able to be remotely accessed for data collection as the Cleanroom requires strict Personal Protective Equipment guidelines and is not easily accessible. The setup is depicted in the diagram below:
+Before the SURF project began, BNC staff installed four ***ifm*** current transformer (CT) sensors in the circuit breaker box to monitor and collect current consumption data on the Plasma-Therm Apex machine's 3-phase, 4-wire 208 Volt Wye (Y) Configuration electric power plug, which includes three active wires and one neutral wire.
+
+<img width="358" alt="Screenshot 2024-07-03 at 4 18 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/b7e601fe-6f16-439f-ade8-159db856c784">
+
+A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link network communications protocol for measuring current using Analog-to-Digital Conversion (ADC). This laptop will not only serve as the edge computer for the project but can also be remotely accessed for data collection as the Cleanroom requires strict Personal Protective Equipment guidelines and is not easily accessible. The setup is depicted in the diagram below:
 
 <img width="734" alt="Screenshot 2024-07-03 at 3 59 49 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/1e7cef48-6291-40d4-ae2a-cfa9828f2664">
 
-After installation of sensors, the plasma etcher machine continued to be operated as normal by the staff within BNC's Cleanroom. The laptop continously collected current data from the span of May 16, 2024 to June 14, 2024 for the three phase wires (named "Phase A", "Phase B", and "Phase C") and neutral wire.
+After the sensors were installed, the plasma etcher machine continued to be operated as usual by the staff within BNC's Cleanroom. The laptop continuously collected current data from May 16, 2024, to June 14, 2024, for the three-phase wires (named "Phase A," "Phase B," and "Phase C") and a neutral wire. The control PC connected to the plasma etching machine also kept track of the machine operation status log, which will be used to pattern-match with the current data from the time series and verify operation start times with the collected current data.
 
+#### ***Real-world installation images:***
 
-Moneo software installed on the computer continued to collect 
+<img width="409" alt="Screenshot 2024-07-03 at 4 20 02 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/5f8430f2-01e4-4c11-995b-329ce770bd25">
+<img width="659" alt="Screenshot 2024-07-03 at 4 20 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/d41c2726-95ec-4112-9d5a-31efb3925769">
 
-
+<br> 
 
 ### *2) Database & Visualization:* cleaning, organizing, and visualizing data <br>
+
+The "*moneo*" software served as an application software produced by ifm that directly integrated with the ifm sensors and visualized the collected current data. 
+
+![moneo](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/424249d2-aa4f-48e2-872e-cb1c1d2c22bf)
+
+Data for the three phases and neutral wire was collected every second (1-second intervals) over the month-long span. However, *moneo* displays data points averaged from 10-20 minutes of data collection, which the team determined would not be sufficient for research purposes or creating the most accurate Machine Learning model. Therefore, the raw data was extracted from the ***InfluxDB*** database without the post-processing that *moneo* performed. Extracting the data for each phase resulted in a database with 2,699,013 data points for Phases A, B, C, and Neutral.
+
+
+
 
 ### *3) Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
 
