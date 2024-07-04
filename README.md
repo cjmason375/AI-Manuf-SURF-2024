@@ -81,9 +81,17 @@ There were two significant issues with the raw current data that prevented immed
 
 ***[Python Script to convert timestamps and ADC current values](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/raw_format.py)*** (*raw_format.py*)
 
-After intial processing, timestamps were aligned for all collected data, and current consumption values for each phase were combined into a central CSV file to be used as the primary database for the project. Other collected data, such as "name", "max", "min", and "psid" were excluded from the merged file as they were deemed as unnecessary for data analyzation.
+After initial processing, timestamps were aligned for all collected data, and current consumption values for each phase were combined into a central CSV file to be used as the project's primary time-series current value database. Other collected data, such as "name," "max," "min," and "psid," were excluded from the merged file as they were deemed unnecessary for data analysis.
 
-***[Merged Post-Processing Database for current and time data](...)
+***[Merged Post-Processing Database for current and time data](https://app.box.com/s/krpmk6wtmzolxtw43c7wiemmswiylmyj)***
+
+<img width="800" alt="Screenshot 2024-07-04 at 6 24 29 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/01d4cc9b-7b2d-494c-b34c-7b606e6b7db2">
+
+The operation status log was exported from the Control PC connected to the plasma etching machine, which provided information on the machine's operation start times, the operation status, operated recipes, and users. The Control PC was discovered to be offset by 25 minutes and 57 seconds, so all original time values were adjusted to add that difference.
+
+<img width="800" alt="Screenshot 2024-07-04 at 6 37 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/343bfecd-9746-4d7b-a4ad-22739fe0fd5d">
+
+
 
 
 
