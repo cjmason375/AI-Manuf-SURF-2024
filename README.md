@@ -74,11 +74,18 @@ Cleaning and organizing data was essential to analyzing and visualizing the curr
 There were two significant issues with the raw current data that prevented immediate analysis of the current data:
 
   1. **Timestamp formatting errors**: The timezone needed to be converted from Coordinated Universal Time (UTC) to Eastern Standard Time (EST), needed the "T" and "Z" characters removed from the timestamps, and required the inclusion of microseconds into each timestamp to ensure standardized data points.
-  2. **Conversion of ADC values**: The original current values, listed under the "value" column, were measured from the current transformers, but they were not actual current values. Therefore, conversion was needed to change the measured ADC values to actual values, measured in Amps. The necessary equation was determined to be:
+  2. 
+  3. **Conversion of ADC values**: The original current values, listed under the "value" column, were measured from the current transformers, but they were not actual current values. Therefore, conversion was needed to change the measured ADC values to actual values, measured in Amps. The necessary equation was determined to be:
 
 ### $$\scriptstyle Amps(A)\ = \frac{25}{8}\*(x-4)$$
 
-***[Python Script to convert timestamps and ADC current values](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/raw_format.py)***
+***[Python Script to convert timestamps and ADC current values](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/raw_format.py)*** (*raw_format.py*)
+
+After intial processing, timestamps were aligned for all collected data, and current consumption values for each phase were combined into a central CSV file to be used as the primary database for the project. Other collected data, such as "name", "max", "min", and "psid" were excluded from the merged file as they were deemed as unnecessary for data analyzation.
+
+***[Merged Post-Processing Database for current and time data](...)
+
+
 
 
 
