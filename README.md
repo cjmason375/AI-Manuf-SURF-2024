@@ -74,17 +74,17 @@ Cleaning and organizing data was essential to analyzing and visualizing the curr
 There were two significant issues with the raw current data that prevented immediate analysis of the current data:
 
   1. **Timestamp formatting errors**: The timezone needed to be converted from Coordinated Universal Time (UTC) to Eastern Standard Time (EST), needed the "T" and "Z" characters removed from the timestamps, and required the inclusion of microseconds into each timestamp to ensure standardized data points.
-  2. **Conversion of ADC values**: The original current values, listed under the "value" column, were measured from the current transformers, but they were not true current values. Therefore, conversion was needed to change the measured ADC values to actual values, measured in Amps. The necessary equation was determined to be:
+  2. **Conversion of ADC values**: The original current values, listed under the "value" column, were measured from the current transformers, but they were not actual current values. Therefore, conversion was needed to change the measured ADC values to actual values, measured in Amps. The necessary equation was determined to be:
 
 ### $$\scriptstyle Amps(A)\ = \frac{25}{8}\*(x-4)$$
 
-
+***[Python Script to convert timestamps and ADC current values](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/raw_format.py)***
 
 
 
 {adjusting time format of Excel file for status log}
 
 
-# *3) Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
+### *3) Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
 
 
