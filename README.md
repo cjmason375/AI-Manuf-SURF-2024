@@ -9,7 +9,7 @@ View [abstract](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/Ab
 
 <br>
 
-## *INTRODUCTION/BACKGROUND*
+## **1) INTRODUCTION/BACKGROUND**
 
 #### *From Everett's [Annotated Literature Review](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/Annotated%20Literature%20Review):* <br>
 
@@ -29,22 +29,26 @@ Using (four) IoT current sensors connected through the IO-Link protocol, data wa
 
 <br>
 
-## *METHODS*
+## **2)  METHODOLOGY**
 
-<img width="800" alt="Screenshot 2024-07-03 at 4 02 21 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/9b08e460-c3d7-4495-80a6-98e8302898ff">
-<br> 
+<img width="800" alt="Proposed Methodology Pipeline" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/9b08e460-c3d7-4495-80a6-98e8302898ff">
+<br>
 
+*Caption*
 
+### ***2.1) Data Collection*** <br>
 
-### *1) Data Collection:* IoT sensor connectivity and communication <br>
+Before the SURF project began, BNC staff installed four ***ifm*** current transformer (CT) sensors in the circuit breaker box to monitor and collect current consumption data on the Plasma-Therm Apex machine's *3-phase, 4-wire 208 Volt Wye (Y) Configuration electric power plug*, which includes three active wires and one neutral wire.
 
-Before the SURF project began, BNC staff installed four ***ifm*** current transformer (CT) sensors in the circuit breaker box to monitor and collect current consumption data on the Plasma-Therm Apex machine's 3-phase, 4-wire 208 Volt Wye (Y) Configuration electric power plug, which includes three active wires and one neutral wire.
+<img width="400" alt="Screenshot 2024-07-03 at 4 18 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/b7e601fe-6f16-439f-ade8-159db856c784">
 
-<img width="800" alt="Screenshot 2024-07-03 at 4 18 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/b7e601fe-6f16-439f-ade8-159db856c784">
+*Caption*
 
 A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link network communications protocol for measuring current using Analog-to-Digital Conversion (ADC). This laptop will not only serve as the edge computer for the project but can also be remotely accessed for data collection as the Cleanroom requires strict Personal Protective Equipment guidelines and is not easily accessible. The setup is depicted in the diagram below:
 
 <img width="800" alt="Screenshot 2024-07-03 at 3 59 49 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/1e7cef48-6291-40d4-ae2a-cfa9828f2664">
+
+*Caption*
 
 After the sensors were installed, the plasma etcher machine continued to be operated as usual by the staff within BNC's Cleanroom. The laptop continuously collected current data from May 16, 2024, to June 14, 2024, for the three-phase wires (named "Phase A," "Phase B," and "Phase C") and a neutral wire. The control PC connected to the plasma etching machine also kept track of the machine operation status log, which will be used to pattern-match with the current data from the time series and verify operation start times with the collected current data.
 
@@ -53,53 +57,93 @@ After the sensors were installed, the plasma etcher machine continued to be oper
 <img width="800" alt="Screenshot 2024-07-03 at 4 20 02 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/5f8430f2-01e4-4c11-995b-329ce770bd25">
 <img width="800" alt="Screenshot 2024-07-03 at 4 20 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/d41c2726-95ec-4112-9d5a-31efb3925769">
 
+*Caption*
 
 
 <br> 
 
-### *2) Database & Visualization:* cleaning, organizing, and visualizing data <br>
+### *2.2) Database & Visualization:* cleaning, organizing, and visualizing data <br>
+
+#### *2.2.1) Extracting raw data* <br>
 
 The "*moneo*" software served as an application software produced by ifm that directly integrated with the ifm sensors and visualized the collected current data. 
 
 ![moneo](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/76aedc9c-b18c-4fd1-b384-63099893c345)
+*Snippet of moeno visualization graph for all four wires*
 
-Data for the three phases and neutral wire was collected every second (1-second intervals) over the month-long span. However, *moneo* displays data points averaged from 10-20 minutes of data collection, which the team determined would not be sufficient for research purposes or creating the most accurate Machine Learning model. Therefore, the raw data was extracted from the ***InfluxDB*** database without the post-processing that *moneo* performed. (*insert more info please*) Extracting the data for each phase resulted in a database with 2,699,013 data points for each of the four sensors - Phases A, B, C, and Neutral.
+Data for the three phases and neutral wire was collected every second (1-second intervals) over the month-long span. However, *moneo* displays data points averaged from 10-20 minutes of data collection, which the team determined would not be sufficient for research purposes or creating the most accurate Machine Learning model. Therefore, the raw data was extracted from the ***InfluxDB*** database without the post-processing that *moneo* performed. 
 
+(*insert more info please*)
 
+Extracting the data for each phase resulted in a database with 2,699,013 data points for each of the four sensors - Phases A, B, C, and Neutral.
+
+#### *2.2.2) Formatting current data* <br>
 
 Cleaning and organizing data was essential to analyzing and visualizing the current data. Below is a screenshot of the original data collected in a comma-separated value (CSV) file.
 
 <img width="800" alt="Screenshot 2024-07-04 at 1 23 38 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/80b5a857-9a31-4ccc-bf58-11c8c1ce764c"> <br>
+*Snippet of original exported Phase A current data*
 
 There were two significant issues with the raw current data that prevented immediate analysis of the current data:
 
   1. **Timestamp formatting errors**: The timezone needed to be converted from Coordinated Universal Time (UTC) to Eastern Standard Time (EST), needed the "T" and "Z" characters removed from the timestamps, and required the inclusion of microseconds into each timestamp to ensure standardized data points.
-  2. 
-  3. **Conversion of ADC values**: The original current values, listed under the "value" column, were measured from the current transformers, but they were not actual current values. Therefore, conversion was needed to change the measured ADC values to actual values, measured in Amps. The necessary equation was determined to be:
+  2. **Conversion of ADC values**: The original current values, listed under the "value" column, were measured from the current transformers, but they were not actual current values. Therefore, conversion was needed to change the measured ADC values to actual values, measured in Amps. The necessary equation was determined to be:
 
 ### $$\scriptstyle Amps(A)\ = \frac{25}{8}\*(x-4)$$
 
 ***[Python Script to convert timestamps and ADC current values](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/raw_format.py)*** (*raw_format.py*)
 
-After initial processing, timestamps were aligned for all collected data, and current consumption values for each phase were combined into a central CSV file to be used as the project's primary time-series current value database. Other collected data, such as "name," "max," "min," and "psid," were excluded from the merged file as they were deemed unnecessary for data analysis.
+#### *2.2.2) Merging current data* <br>
+
+After initial processing, timestamps were aligned for all collected data, and current consumption values for each phase were combined into a central CSV file to be used as the project's primary time-series current value database. Other collected data, such as "name," "max," "min," and "psid," were excluded from the merged file as they were deemed unnecessary for the project's data analytics.
 
 ***[Merged Post-Processing Database for current and time data](https://app.box.com/s/krpmk6wtmzolxtw43c7wiemmswiylmyj)***
 
 <img width="800" alt="Screenshot 2024-07-04 at 6 24 29 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/01d4cc9b-7b2d-494c-b34c-7b606e6b7db2">
 
+*Snippet of final merged current data for all four wires, along with timestamps*
+
+#### *2.2.3) Adjusting operation status log* <br>
+
 The operation status log was exported from the Control PC connected to the plasma etching machine, which provided information on the machine's operation start times, the operation status, operated recipes, and users. The Control PC was discovered to be offset by 25 minutes and 57 seconds, so all original time values were adjusted to add that difference.
 
 <img width="800" alt="Screenshot 2024-07-04 at 6 37 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/343bfecd-9746-4d7b-a4ad-22739fe0fd5d">
 
+*Snippet of adjusted status log data*
+
+#### *2.2.5) Analyzing operation status log* <br>
+
+With the operation status log formatted and processed, analysis was performed on the operation status log to determine the most common recipes, total number of unique recipes, and the total occurence number of each status. This analysis was performed by sorting in Excel. Results of the top most common recipes and all other data are shown below:
+
+<img width="400" alt="Screenshot 2024-07-05 at 8 19 46 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/0384eb48-768c-4165-8fa5-5f651c780ae8">
+
+*Caption*
+
+After discussion with a manager of the Cleanroom and the plasma machine, the status color of each recipe was determined to relate to the following table:
+
+*(insert table for status log colors)*
+
+
+#### *2.2.5) Pattern-matching current data with operation status log* <br>
+
+By pattern-matching the start times of operations from the status log to the post-processed current data, the team aimed to verify that the increases in magnitude in the current data correlated to operations being performed on the plasma etcher machine. This would also verify that the general periodic nature of the current data correlated to an idle state within the machine.
+
+A MATLAB script was written to read and plot both sets of processed data. The current data was to be plotted as four seperate line graphs, each with a different color and line-style to represent each phase of current data. The status log data was to be plotted as vertical color-coded lines with the unique recipe name attached, as to represent the beginning of recipe and its associated status.
+
+***[MATLAB Script to plot current and status log data](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/MultiPhase_Graph.m)*** (*MultiPhase_Graph.m*)
+
+<img width="1136" alt="Screenshot 2024-07-05 at 8 37 54 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/c3e0831c-a612-4bd6-a267-2e84820fc472">
+
+*MATLAB graph snippet, displaying operations from June 5, 2024*
 
 
 
 
 
 
-{adjusting time format of Excel file for status log}
 
 
-### *3) Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
+
+### *2.3) Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
 
 
