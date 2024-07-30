@@ -5,9 +5,11 @@ Feel free to contact me at *jemason@purdue.edu* or *everettmasonjr23@gmail.com*
 
 View [abstract](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/Abstract.md) here.
 
-
+View [Summer Research Symposium Presentation]() here.
 
 <br>
+
+
 
 ## **1) INTRODUCTION/BACKGROUND**
 
@@ -44,17 +46,17 @@ Using four (4) IoT current sensors connected through the IO-Link protocol, data 
 
 ### ***2.1) Data Collection*** <br>
 
+<img width="600" alt="Screenshot 2024-07-29 at 7 04 29 PM" src="https://github.com/user-attachments/assets/3746d4d8-72df-4cce-8bf3-dd022d75c779">
+
+*Overview of setup for data collection from BNC plasma etching machine*
+
 Before the SURF project began, BNC staff installed four ***ifm*** current transformer (CT) sensors in the circuit breaker box to monitor and collect current consumption data on the Plasma-Therm Apex machine's *3-phase, 4-wire 208 Volt Wye (Y) Configuration electric power plug*, which includes three active wires and one neutral wire.
 
 <img width="600" alt="Screenshot 2024-07-03 at 4 18 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/b7e601fe-6f16-439f-ade8-159db856c784">
 
-*Diagram view of 3-phase, 4-wire setup of plasma etching machine.*
+*Detailed diagram view of 3-phase, 4-wire setup of plasma etching machine.*
 
-A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link network communications protocol for measuring current using Analog-to-Digital Conversion (ADC). This laptop will not only serve as the edge computer for the project, but can also be remotely accessed for data collection as the Cleanroom requires strict Personal Protective Equipment guidelines and is not easily accessible. The setup is depicted in the diagram below:
-
-<img width="800" alt="Screenshot 2024-07-03 at 3 59 49 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/1e7cef48-6291-40d4-ae2a-cfa9828f2664">
-
-*Caption*
+A laptop computer was installed near the breaker box, and the sensors were connected to the laptop through an ifm IO-Link Master and the IO-Link network communications protocol for measuring current using Analog-to-Digital Conversion (ADC). This laptop will not only serve as the edge computer for the project, but can also be remotely accessed for data collection as the Cleanroom requires strict Personal Protective Equipment guidelines and is not easily accessible.
 
 After the sensors were installed, the plasma etcher machine continued to be operated as usual by the staff within BNC's Cleanroom. The laptop continuously collected current data from May 16, 2024, to June 14, 2024, for the three-phase wires (named "Phase A," "Phase B," and "Phase C") and a neutral wire. The control PC connected to the plasma etching machine also kept track of the machine operation status log, which will be used to pattern-match with the current data from the time series and verify operation start times with the collected current data.
 
