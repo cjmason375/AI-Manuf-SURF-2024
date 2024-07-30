@@ -27,7 +27,7 @@ With an ML model created, optimizing the speed at which the model can make decis
 
 *Defined objectives for the project.*
 
-The Purdue SURF Project revolves around the case study of implementing ***real-time mutli-sensor machine monitoring of operation state and condition prediciton*** on a plasma etcher machine within the Semiconductor Cleanroom at Purdue University's Birck Nanotechnology Center (BNC). The machine has multiple components contributing to the overall current consumption: the main chamber, loading chamber, chiller, and turbo pump (high vacuum). There is also a gas pipeline, vacuum pump (low vacuum), and control PC, but these components do not significantly contribute to the measured current consumption. When not in operation, the chiller and turbo pump periodically operate to maintain a constant temperature and pressure within the chamber.
+The Purdue SURF Project revolves around the case study of implementing ***real-time multi-sensor machine monitoring of operation state and condition prediction*** on a plasma etcher machine within the Semiconductor Cleanroom at Purdue University's Birck Nanotechnology Center (BNC). The machine has multiple components contributing to the overall current consumption: the main chamber, loading chamber, chiller, and turbo pump (high vacuum). There is also a gas pipeline, vacuum pump (low vacuum), and control PC, but these components do not significantly contribute to the measured current consumption. When not in operation, the chiller and turbo pump periodically operate to maintain a constant temperature and pressure within the chamber.
 
 Using four (4) IoT current sensors connected through the IO-Link protocol, data was collected on the machine's three active wires and neutral wire over a month. This data was then cleaned and pattern-matched with time-series data to create an ML algorithm based on the periodic trend of the machine's idle state and the magnitude increase/decrease in current data observed when the machine operates a recipe. This model was then implemented onto an edge computing device to track machine current and power usage information and execute the three steps of the model: 1) accessing the machine state, 2) tracking the "recipe" (operation) executed, and 3) detecting anomalies in the machine's behavior.
 
@@ -62,13 +62,11 @@ After the sensors were installed, the plasma etcher machine continued to be oper
 
 #### ***Real-world installation images:***
 
-<img width="800" alt="Screenshot 2024-07-03 at 4 20 02 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/5f8430f2-01e4-4c11-995b-329ce770bd25">
-<img width="800" alt="Screenshot 2024-07-03 at 4 20 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/d41c2726-95ec-4112-9d5a-31efb3925769">
+<img width="600" alt="Screenshot 2024-07-29 at 7 53 34 PM" src="https://github.com/user-attachments/assets/650dcfb5-7e55-4696-96a1-5a9a0edd1d6a">
 
-*Caption*
+*Labeled images of significant data collection components.*
 
 
-<br> 
 
 ### *2.2) Database & Visualization:* cleaning, organizing, and visualizing data <br>
 
@@ -76,12 +74,10 @@ After the sensors were installed, the plasma etcher machine continued to be oper
 
 The "*moneo*" software served as an application software produced by ifm that directly integrated with the ifm sensors and visualized the collected current data. 
 
-![moneo](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/76aedc9c-b18c-4fd1-b384-63099893c345)
-*Snippet of moeno visualization graph for all four wires*
+<img width="600" alt="Screenshot of Moneo data" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/76aedc9c-b18c-4fd1-b384-63099893c345"> <br>
+*Snippet of moeno visualization graph for all four wires.*
 
-Data for the three phases and neutral wire was collected every second (1-second intervals) over the month-long span. However, *moneo* displays data points averaged from 10-20 minutes of data collection, which the team determined would not be sufficient for research purposes or creating the most accurate Machine Learning model. Therefore, the raw data was extracted from the ***InfluxDB*** database without the post-processing that *moneo* performed. 
-
-(*insert more info please*)
+Current consumption data for the three phases and neutral wire was **collected every second (1-second intervals) over the month-long span**. However, *moneo* displays data points averaged from 10-20 minutes of data collection, which the team determined would not be sufficient for research purposes or creating the most accurate Machine Learning model as small changes in the data would not be accurately represented. Therefore, my mentor extracted raw data from the ***InfluxDB*** database without the post-processing averaging that *moneo* performed.
 
 Extracting the data for each phase resulted in a database with 2,699,013 data points for each of the four sensors - Phases A, B, C, and Neutral.
 
@@ -89,7 +85,7 @@ Extracting the data for each phase resulted in a database with 2,699,013 data po
 
 Cleaning and organizing data was essential to analyzing and visualizing the current data. Below is a screenshot of the original data collected in a comma-separated value (CSV) file.
 
-<img width="800" alt="Screenshot 2024-07-04 at 1 23 38 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/80b5a857-9a31-4ccc-bf58-11c8c1ce764c"> <br>
+<img width="600" alt="Screenshot 2024-07-04 at 1 23 38 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/80b5a857-9a31-4ccc-bf58-11c8c1ce764c"> <br>
 *Snippet of original exported Phase A current data*
 
 There were two significant issues with the raw current data that prevented immediate analysis of the current data:
@@ -97,31 +93,34 @@ There were two significant issues with the raw current data that prevented immed
   1. **Timestamp formatting errors**: The timezone needed to be converted from Coordinated Universal Time (UTC) to Eastern Standard Time (EST), needed the "T" and "Z" characters removed from the timestamps, and required the inclusion of microseconds into each timestamp to ensure standardized data points.
   2. **Conversion of ADC values**: The original current values, listed under the "value" column, were measured from the current transformers, but they were not actual current values. Therefore, conversion was needed to change the measured ADC values to actual values, measured in Amps. The necessary equation was determined to be:
 
-### $$\scriptstyle Amps(A)\ = \frac{25}{8}\ \times\ (x-4)$$
+$$\scriptstyle Amps(A)\ = \frac{25}{8}\ \times\ (x-4)$$
 
-***[Python Script to convert timestamps and ADC current values](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/raw_format.py)*** (*raw_format.py*)
+***Python Script to convert timestamps and ADC current values***: [**raw_format.py**](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/raw_format.py)
+
 
 #### *2.2.2) Merging current data* <br>
 
-After initial processing, timestamps were aligned for all collected data, and current consumption values for each phase were combined into a central CSV file to be used as the project's primary time-series current value database. Other collected data, such as "name," "max," "min," and "psid," were excluded from the merged file as they were deemed unnecessary for the project's data analytics.
+After initial processing, timestamps were aligned for all collected data, and current consumption values for each phase were combined into a central CSV file to be used as the project's primary time-series current value database. My mentor also calculated the accumulated time since the beginning of data collection (*"accum_time"*) and the time since the last recording (*"time_diff"*). Other collected data, such as "name," "max," "min," and "psid," were excluded from the merged file as they were deemed unnecessary for further data analytics.
 
-***[Merged Post-Processing Database for current and time data](https://app.box.com/s/krpmk6wtmzolxtw43c7wiemmswiylmyj)***
+<img width="600" alt="Screenshot 2024-07-04 at 6 24 29 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/01d4cc9b-7b2d-494c-b34c-7b606e6b7db2">
 
-<img width="800" alt="Screenshot 2024-07-04 at 6 24 29 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/01d4cc9b-7b2d-494c-b34c-7b606e6b7db2">
+***[Merged post-processing database for current and time data](https://app.box.com/s/krpmk6wtmzolxtw43c7wiemmswiylmyj)***
 
-*Snippet of final merged current data for all four wires, along with timestamps*
+*Snippet of final merged current data CSV file for all four wires, along with timestamps*
+
+
 
 #### *2.2.3) Adjusting operation status log* <br>
 
-The operation status log was exported from the Control PC connected to the plasma etching machine, which provided information on the machine's operation start times, the operation status, operated recipes, and users. The Control PC was discovered to be offset by 25 minutes and 57 seconds, so all original time values were adjusted to add that difference.
+The operation status log was collected and exported from the Control PC connected to the plasma etching machine. It provided information on the machine's operation start times, operation status, operating recipes, and users. The Control PC was discovered to be offset by 25 minutes and 57 seconds from the correct time, so all original time values were adjusted to add that difference.
 
-<img width="800" alt="Screenshot 2024-07-04 at 6 37 25 PM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/343bfecd-9746-4d7b-a4ad-22739fe0fd5d">
+<img width="800" alt="Screenshot 2024-07-29 at 8 16 17 PM" src="https://github.com/user-attachments/assets/3e900513-afac-4fec-b0b2-aa6e4c63e6af">
 
 *Snippet of adjusted status log data*
 
 #### *2.2.5) Analyzing operation status log* <br>
 
-With the operation status log formatted and processed, analysis was performed on the operation status log to determine the most common recipes, total number of unique recipes, and the total occurence number of each status. This analysis was performed by sorting in Excel. Results of the top most common recipes and all other data are shown below:
+With the operation status log formatted and processed, analysis was performed on the operation status log to determine the most common recipes, the total number of unique recipes, and the total occurrence number of each status. This analysis was performed by sorting in Excel. Results of the top most common recipes and all other data are shown below:
 
 <img width="400" alt="Screenshot 2024-07-05 at 8 19 46 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/0384eb48-768c-4165-8fa5-5f651c780ae8">
 
