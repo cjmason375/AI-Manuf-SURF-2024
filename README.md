@@ -5,7 +5,7 @@ Feel free to contact me at *jemason@purdue.edu* or *everettmasonjr23@gmail.com*
 
 View [abstract](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/Abstract.md) here.
 
-View [Summer Research Symposium Presentation]() here.
+View [Summer Research Symposium Presentation](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/MasonJr_Everett_FinalPresentation.pdf) here.
 
 <br>
 
