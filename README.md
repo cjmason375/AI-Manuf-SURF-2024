@@ -236,9 +236,54 @@ Based on the Principal Component Analysis from the previous step, anomalies will
 *Anomaly detection visual on PCA graph, with anomalies represented by red dots.*
 
 
-### *2.4) Web Dashboard for machine monitoring <br>
+### ***2.4) Web Dashboard for machine monitoring*** <br>
+
+With trained Machine Learning models and live classification of machine operation and condition information, the team seeks to utilize all of this insight to provide operators with an easily digestible and understandable view of real-time machine information. 
+
+Using the edge computer in the data collection setup, future work will be performed on a web dashboard using the Purdue SENSE server, mySQL for the database, and Grafana as the web service.
+
+The dashboard seeks to provide operators with the following parameters, at a minimum:
+- Live current consumption data
+- Live power consumption data
+- Bar graph of operation state
+- Recipe occurrence numbers and names
+- Anomaly rate
+
+For each of these parameters, users will be able to zoom in and out on data, enabling operators to evaluate desired information as well as effectively scaling all graphs in sync with other graphs.
+
+*Preliminary work on the web dashboard can be viewed here:* [**Web Dashboard**](http://sense.ecn.purdue.edu:3100/d/cdryet95rpzpcf/plasma-apex2?orgId=7)
 
 
 
+
+## **3) RESULTS/DISCUSSION/CONCLUSION**
+
+Although we were unable to complete all project work over the summer, the preliminary work completed has assured the team that real-time machine monitoring using electrical current consumption data is possible.
+
+<img width="800" alt="Screenshot 2024-07-30 at 1 35 12 AM" src="https://github.com/user-attachments/assets/b22075e8-8a19-4e73-bc72-45f02d1c096c">
+
+This work connects to the larger goal of implementing predictive maintenance on machines. By intelligently detecting and tracking machine operation and condition behavior, operators will be able to determine ideal repair times and detect unusual machine behavior. Combined, these insights will be able to increase efficiency and decrease the economics of machines in factories.
+
+
+
+
+
+## **4) REFERENCES**
+
+1) ["Sound Recognition based on Convolutional Neural Network for Real-Time Cutting State Monitoring of Tube Cutting Machine"](https://www.ijpem-st.org/journal/view.php?doi=10.57062/ijpem-st.2022.0038)
+
+2) ["Operation and Productivity Monitoring from Sound Signal of Legacy Pipe Bending Machine via Convolutional Neural Network (CNN)"](https://link.springer.com/article/10.1007/s12541-024-01018-3)
+
+3) ["Online Real-time Machining Chatter Sound Detection using Convolutional Neural Network by Adopting Expert Knowledge" (not yet published)]
+
+4) [Purdue ME597 Course: IIoT Implementation for Smart Manufacturing](https://github.com/purduelamm/purdue_me597_iiot)
+
+5) ["Machine Learning approach for Predictive Maintenance in Industry 4.0"](https://ieeexplore.ieee.org/abstract/document/8449150)
+
+6) ["Machine Learning for Predictive Maintenance: A Multiple Classifier Approach"](https://ieeexplore.ieee.org/abstract/document/6879441)
+
+7) ["Multi-sensor information fusion based on machine learning for real applications in human activity recognition: State-of-the-art and research challenges"](https://www.sciencedirect.com/science/article/pii/S1566253521002311)
+
+8) [Predictive Maintenance and More: How to Use Machine Learning Without Being a Data Scientist](https://www.youtube.com/watch?v=zXcp2HvpJLE)
 
 
