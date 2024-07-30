@@ -209,23 +209,36 @@ From these observations, a current threshold to determine operation was establis
 
 
 
+#### *2.3.2) Time-Series Feature Analysis* <br>
+
+Aside from detecting the operation state of the machine, the monitoring framework also seeks to detect specific recipes operated on the machine.
+
+An initial prospective component for detecting operated recipes was time-focused. However, upon further inspection, the same recipe often occurred at varying lengths, as shown in the figure below:
+
+<img width="600" alt="Screenshot 2024-07-30 at 12 15 11 AM" src="https://github.com/user-attachments/assets/03fec908-3e7f-4117-8e19-7f30342bece3">
+
+*All "O2 Clean" recipes, but all with varying lengths (represented within the white rectangles)*
+
+Therefore, future work on the project seeks to utilize *principal component analysis (PCA)* to classify recipes based on the following statistical parameters: mean, root mean square (RMS), standard deviation, maximum and minimum values, skewness, and kurtosis. From this process, the team seeks to utilize unsupervised data clustering to create a graph similar to the one below, which groups the most similar occurrences together and allows for the labeling of new recipe data based on the proximity to clustered data.
+
+<img width="600" alt="Screenshot 2024-07-30 at 12 36 44 AM" src="https://github.com/user-attachments/assets/e665488c-aa3a-427f-8ab4-81b526409cb2">
+
+*Four "O2 Clean" recipes, but all with varying lengths (represented within the white rectangles)*
 
 
 
+#### *2.3.3) Anomaly Detection* <br>
+
+Based on the Principal Component Analysis from the previous step, anomalies will be easily detectable, as the PCA for that instance will likely show unnatural behavior or proximity to an expected cluster location. Anomaly detection is important for machine monitoring, as it may be indicative of machine errors or possible failures.
+
+<img width="600" alt="Screenshot 2024-07-30 at 1 02 46 AM" src="https://github.com/user-attachments/assets/64d4e307-4d65-42e8-83c5-b24d71a7bed0">
+
+*Anomaly detection visual on PCA graph, with anomalies represented by red dots.*
+
+
+### *2.4) Web Dashboard for machine monitoring <br>
 
 
 
-
-
-#### *2.2.7) Pattern-matching current data with operation status log* <br>
-
-By pattern-matching the start times of operations from the status log to the post-processed current data, the team aimed to verify that the increases in magnitude in the current data correlated to operations being performed on the plasma etcher machine. This would also verify that the general periodic nature of the current data correlated to an idle state within the machine.
-
-
-
-
-
-
-### *2.3) Machine Learning:* training AI and ML model, implementing to edge computer, and real-time recognition  <br>
 
 
