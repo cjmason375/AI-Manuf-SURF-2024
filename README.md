@@ -176,7 +176,7 @@ Using MATLAB, data from each phase of the collected current data was plotted in 
 
 ***MATLAB .fig file for current graph***: [...](...)
 
-The total power data was also plotted with MATLAB in a similar manner as the current data; however, there was only 1 time-series graph as only the total power consumption was plotted rather than the power consumption of each graph. As well, numbers were converted to kVA, rahter than VA, for more convenient graph scaling. The operation status log was plotted in the same manner as the current graph, for further visual analysis.
+The total power data was also plotted with MATLAB in a similar manner as the current data; however, there was only 1 time-series graph as only the total power consumption was plotted rather than the power consumption of each graph. As well, values were converted to kVA, rather than VA, for more convenient graph scaling. The operation status log was plotted in the same manner as the current graph, for further visual analysis.
 
 <img width="600" alt="Screenshot 2024-07-29 at 9 54 23 PM" src="https://github.com/user-attachments/assets/bc242fb2-d3ec-4352-8935-28345a11d3e0">
 
