@@ -106,32 +106,62 @@ After initial processing, timestamps were aligned for all collected data, and cu
 
 ***[Merged post-processing database for current and time data](https://app.box.com/s/krpmk6wtmzolxtw43c7wiemmswiylmyj)***
 
-*Snippet of final merged current data CSV file for all four wires, along with timestamps*
+*Snippet of final merged current data CSV file for all four wires.*
 
 
 
 #### *2.2.3) Adjusting operation status log* <br>
 
-The operation status log was collected and exported from the Control PC connected to the plasma etching machine. It provided information on the machine's operation start times, operation status, operating recipes, and users. The Control PC was discovered to be offset by 25 minutes and 57 seconds from the correct time, so all original time values were adjusted to add that difference.
+The operation status log was collected on the Control PC connected to the plasma etching machine. It provided information on the machine's operation start times, operation status, operating recipes, and users. However, the PC lacked a built-in functionality to export collected status data to a CSV file, so an Excel file was manually created based on photos of the operation status log.
 
-<img width="800" alt="Screenshot 2024-07-29 at 8 16 17 PM" src="https://github.com/user-attachments/assets/3e900513-afac-4fec-b0b2-aa6e4c63e6af">
+The Control PC was discovered to be offset by 25 minutes and 57 seconds from the correct time, so all original time values were adjusted to add that difference.
 
-*Snippet of adjusted status log data*
+<img width="600" alt="Screenshot 2024-07-29 at 8 16 17 PM" src="https://github.com/user-attachments/assets/3e900513-afac-4fec-b0b2-aa6e4c63e6af">
 
-#### *2.2.5) Analyzing operation status log* <br>
+*Snippet of adjusted status log data.*
+
+
+
+#### *2.2.4) Analyzing operation status log* <br>
 
 With the operation status log formatted and processed, analysis was performed on the operation status log to determine the most common recipes, the total number of unique recipes, and the total occurrence number of each status. This analysis was performed by sorting in Excel. Results of the top most common recipes and all other data are shown below:
 
-<img width="400" alt="Screenshot 2024-07-05 at 8 19 46 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/0384eb48-768c-4165-8fa5-5f651c780ae8">
+<img width="600" alt="Screenshot 2024-07-05 at 8 19 46 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/0384eb48-768c-4165-8fa5-5f651c780ae8">
 
-*Caption*
+*Snippet displaying total recipes, total occurrences, total occurrences by status, and the most often occurring recipes.*
 
-After discussion with a manager of the Cleanroom and the plasma machine, the status color of each recipe was determined to relate to the following table:
+After discussion with a manager of the Cleanroom and the plasma machine, the status color of each recipe was determined to relate to the following insights:
 
-*(insert table for status log colors)*
+<img width="600" alt="Screenshot 2024-07-29 at 8 34 20 PM" src="https://github.com/user-attachments/assets/4abf24f4-fe1f-4e8d-9ff0-9016d1abddb2">
+
+Later, the team decided to conduct further analytics, seeking to learn more about each of the unique recipes. Therefore, the following information was found: the number of red, yellow, and green status occurrences for each recipe; the success rate, based on the number of green occurrences divided by the number of total occurrences (per recipe); and the longest and shortest instance for each recipe.
+
+As we sought not to analyze "bad" data, we excluded yellow and red instances from the success rate and longest/shortest instance calculations. Recipes with only one (1) occurrence had that single occurrence labeled as the "longest instance" and "n/a" for the "shortest instance".
+
+<img width="800" alt="Screenshot 2024-07-29 at 8 37 16 PM" src="https://github.com/user-attachments/assets/5e24c337-0f2a-4571-add8-32126268dee5"> <br>
+*Snippet of further calculated analytics on Operation Status Log.*
 
 
-#### *2.2.5) Pattern-matching current data with operation status log* <br>
+
+#### *2.2.5) Calculating total power consumption from current data* <br>
+
+A primary project goal is to give operators and administration insight into the plasma etcher's operation information, so the team decided to calculate the machine's power consumption values.
+
+As current and power are directly proportional and closely related, the power consumption could be calculated from the collected current data. As we could not determine the active or reactive power in our system with the provided information, the power consumption values for each wire was based on ***apparent power values*** through the following equation:
+
+$$\scriptstyle Apparent Power (VA)\ = \scriptstyle line voltage (V)\ \times\ \scriptstyle line current (A)\$$
+
+<br>
+
+$$\scriptstyle Apparent Power (VA)\ = \scriptstyle  120 V\ \times\ \scriptstyle current (A)\$$
+
+The total power consumption was also calculated by adding each of the phases together.
+
+<img width="600" alt="Screenshot 2024-07-29 at 9 03 59 PM" src="https://github.com/user-attachments/assets/009fa568-aa82-49c0-a5a2-cf3ff3900432">
+
+
+
+#### *2.2.6) Pattern-matching current data with operation status log* <br>
 
 By pattern-matching the start times of operations from the status log to the post-processed current data, the team aimed to verify that the increases in magnitude in the current data correlated to operations being performed on the plasma etcher machine. This would also verify that the general periodic nature of the current data correlated to an idle state within the machine.
 
