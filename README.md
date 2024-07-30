@@ -160,21 +160,40 @@ The total power consumption was also calculated by adding each of the phases tog
 <img width="600" alt="Screenshot 2024-07-29 at 9 03 59 PM" src="https://github.com/user-attachments/assets/009fa568-aa82-49c0-a5a2-cf3ff3900432">
 
 
+#### *2.2.6) Visualizing current and power data* <br>
 
-#### *2.2.6) Pattern-matching current data with operation status log* <br>
+With the project's database formatted and cleaned, it was time to visualize current and power data.
+
+Using MATLAB, data from each phase of the collected current data was plotted in Amps (A), resulting in 4 separate graphs. On that same graph, data from the operation status log was vertically plotted, with the color of the graph relating to the status color for that specific occurrenc. The recipe name is also attached to that vertical line, allowing the team to have more visual insight into trends of similar recipes.
+
+<img width="600" alt="Screenshot 2024-07-29 at 9 51 22 PM" src="https://github.com/user-attachments/assets/ea8b9c90-0a4a-4067-bf1b-d81c895aed3c">
+
+*Graphed current data from the beginning of the data collection period to the end.*
+
+<img width="600" alt="Screenshot 2024-07-29 at 9 53 40 PM" src="https://github.com/user-attachments/assets/e8649e0b-c5cb-4875-8f16-b240365e83cf">
+
+*Zoomed in graph of current data, showing each individual phase's current data over time as well as the vertical operation status log information.*
+
+***MATLAB .fig file for current graph***: [...](...)
+
+The total power data was also plotted with MATLAB in a similar manner as the current data; however, there was only 1 time-series graph as only the total power consumption was plotted rather than the power consumption of each graph. As well, numbers were converted to kVA, rahter than VA, for more convenient graph scaling. The operation status log was plotted in the same manner as the current graph, for further visual analysis.
+
+<img width="600" alt="Screenshot 2024-07-29 at 9 54 23 PM" src="https://github.com/user-attachments/assets/bc242fb2-d3ec-4352-8935-28345a11d3e0">
+
+***MATLAB .fig file for total power graph***: [...](...)
+
+
+
+
+
+
+
+
+
+
+#### *2.2.7) Pattern-matching current data with operation status log* <br>
 
 By pattern-matching the start times of operations from the status log to the post-processed current data, the team aimed to verify that the increases in magnitude in the current data correlated to operations being performed on the plasma etcher machine. This would also verify that the general periodic nature of the current data correlated to an idle state within the machine.
-
-A MATLAB script was written to read and plot both sets of processed data. The current data was to be plotted as four seperate line graphs, each with a different color and line-style to represent each phase of current data. The status log data was to be plotted as vertical color-coded lines with the unique recipe name attached, as to represent the beginning of recipe and its associated status.
-
-***[MATLAB Script to plot current and status log data](https://github.com/cjmason375/AI-in-Manuf-SURF-2024/blob/main/MultiPhase_Graph.m)*** (*MultiPhase_Graph.m*)
-
-<img width="1136" alt="Screenshot 2024-07-05 at 8 37 54 AM" src="https://github.com/cjmason375/AI-in-Manuf-SURF-2024/assets/107148984/c3e0831c-a612-4bd6-a267-2e84820fc472">
-
-*MATLAB graph snippet, displaying operations from June 5, 2024*
-
-
-
 
 
 
