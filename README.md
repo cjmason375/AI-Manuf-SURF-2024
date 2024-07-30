@@ -174,13 +174,39 @@ Using MATLAB, data from each phase of the collected current data was plotted in 
 
 *Zoomed in graph of current data, showing each individual phase's current data over time as well as the vertical operation status log information.*
 
-***MATLAB .fig file for current graph***: [...](...)
+***[MATLAB .fig file for current graph](https://app.box.com/s/jxe47pqfffr0ki04y27ibt2jh2v2phjf)***
 
 The total power data was also plotted with MATLAB in a similar manner as the current data; however, there was only 1 time-series graph as only the total power consumption was plotted rather than the power consumption of each graph. As well, values were converted to kVA, rather than VA, for more convenient graph scaling. The operation status log was plotted in the same manner as the current graph, for further visual analysis.
 
 <img width="600" alt="Screenshot 2024-07-29 at 9 54 23 PM" src="https://github.com/user-attachments/assets/bc242fb2-d3ec-4352-8935-28345a11d3e0">
 
-***MATLAB .fig file for total power graph***: [...](...)
+*Zoomed in graph of total power consumption data and vertical operation status log information.*
+
+***[MATLAB .fig file for total power graph](https://app.box.com/s/hvk8armvu5ps8oeq2slw0qh3gbuxc7q8)***
+
+
+
+
+### ***2.3) Machine Learning*** <br>
+
+<img width="600" alt="Screenshot 2024-07-29 at 11 19 59 PM" src="https://github.com/user-attachments/assets/2a3e29ed-d620-45d5-b98e-412b840f4c46">
+
+*Overview of Machine Learning algorithm for detecting machine operation and condition information.*
+
+The team established a fingerprinting algorithm for implementing real-time machine monitoring. There were 3 primary steps: ***1)*** detecting the operation state of the machine, ***2)*** analyzing time-series data and using pattern-matching to determine features of recipes, and ***3)*** detecting anomalies within machine operation.
+
+
+
+#### *2.3.1) Operation State Detection* <br>
+
+While visually analyzing current data, it was determined that two major trends occurred within the current data: an "idle" periodic trend while the machine was not operating and an increase in the current magnitude values at the beginning of machine operation (proved by pattern-matching operation status log start times to current data). Upon further inspection, a major magnitude decrease was found at the end of the machine operation as well.
+
+From these observations, a current threshold to determine operation was established based on Phase B's current data. Phase B was the only phase observed to have low periodicity during operation and a major magnitude change at the beginning and end of operation, so the threshold was based on the values of this phase solely. Through data observation, it was determined that 13 Amps was a decisive limit to determine operation; anything *ABOVE 13 Amps* was labeled as an ***operating state***, and anything *BELOW 13 Amps* was labeled as an ***idle state***. The below graphic gives insight into this process:
+
+<img width="800" alt="Screenshot 2024-07-29 at 11 55 54 PM" src="https://github.com/user-attachments/assets/d0922525-a115-4353-bb21-8c249e796cdd">
+
+*Algorithm flowchart shown on left side, bar graph showing green as operating and grey as idle at bottom, and threshold visual on right side.*
+
 
 
 
